@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dballarmiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AnaOperatori">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="StoricoAllarmi" Relationship="Self.FK_StoricoAllarmi_AnaOperatori" FromRole="AnaOperatori" ToRole="StoricoAllarmi" />
+  </EntityType>
+  <EntityType Name="AnaSensori">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdTipo" Type="Int32" />
+    <Property Name="IsAbilitato" Type="Boolean" />
+    <NavigationProperty Name="StoricoAllarmi" Relationship="Self.FK_StoricoAllarmi_AnaSensori" FromRole="AnaSensori" ToRole="StoricoAllarmi" />
+  </EntityType>
+  <EntityType Name="Luoghi">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CoorX" Type="Int32" />
+    <Property Name="CoorY" Type="Int32" />
+    <Property Name="nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="SensoriLuogo" Relationship="Self.FK_SensoriLuogo_Luoghi" FromRole="Luoghi" ToRole="SensoriLuogo" />
+  </EntityType>
+  <EntityType Name="SensoriLuogo">
+    <Key>
+      <PropertyRef Name="IdCasa" />
+    </Key>
+    <Property Name="IdCasa" Type="Int32" Nullable="false" />
+    <Property Name="IdSensore1" Type="Int32" />
+    <Property Name="IdSensore2" Type="Int32" />
+    <Property Name="IdSensore3" Type="Int32" />
+    <NavigationProperty Name="Luoghi" Relationship="Self.FK_SensoriLuogo_Luoghi" FromRole="SensoriLuogo" ToRole="Luoghi" />
+  </EntityType>
+  <EntityType Name="StoricoAllarmi">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="IdSensore" Type="Int32" />
+    <Property Name="OraScatto" Type="DateTime" Precision="3" />
+    <Property Name="ValoreAllarme" Type="Int32" />
+    <Property Name="OraDisatt" Type="DateTime" Precision="3" />
+    <Property Name="IdOperatore" Type="Int32" />
+    <NavigationProperty Name="AnaOperatori" Relationship="Self.FK_StoricoAllarmi_AnaOperatori" FromRole="StoricoAllarmi" ToRole="AnaOperatori" />
+    <NavigationProperty Name="AnaSensori" Relationship="Self.FK_StoricoAllarmi_AnaSensori" FromRole="StoricoAllarmi" ToRole="AnaSensori" />
+  </EntityType>
+  <EntityType Name="TipiSensori">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TipoSensore" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_StoricoAllarmi_AnaOperatori">
+    <End Role="AnaOperatori" Type="Self.AnaOperatori" Multiplicity="0..1" />
+    <End Role="StoricoAllarmi" Type="Self.StoricoAllarmi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AnaOperatori">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StoricoAllarmi">
+        <PropertyRef Name="IdOperatore" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StoricoAllarmi_AnaSensori">
+    <End Role="AnaSensori" Type="Self.AnaSensori" Multiplicity="0..1" />
+    <End Role="StoricoAllarmi" Type="Self.StoricoAllarmi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AnaSensori">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StoricoAllarmi">
+        <PropertyRef Name="IdSensore" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SensoriLuogo_Luoghi">
+    <End Role="Luoghi" Type="Self.Luoghi" Multiplicity="1" />
+    <End Role="SensoriLuogo" Type="Self.SensoriLuogo" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Luoghi">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SensoriLuogo">
+        <PropertyRef Name="IdCasa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dballarmiEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AnaOperatori" EntityType="Self.AnaOperatori" />
+    <EntitySet Name="AnaSensori" EntityType="Self.AnaSensori" />
+    <EntitySet Name="Luoghi" EntityType="Self.Luoghi" />
+    <EntitySet Name="SensoriLuogo" EntityType="Self.SensoriLuogo" />
+    <EntitySet Name="StoricoAllarmi" EntityType="Self.StoricoAllarmi" />
+    <EntitySet Name="TipiSensori" EntityType="Self.TipiSensori" />
+    <AssociationSet Name="FK_StoricoAllarmi_AnaOperatori" Association="Self.FK_StoricoAllarmi_AnaOperatori">
+      <End Role="AnaOperatori" EntitySet="AnaOperatori" />
+      <End Role="StoricoAllarmi" EntitySet="StoricoAllarmi" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StoricoAllarmi_AnaSensori" Association="Self.FK_StoricoAllarmi_AnaSensori">
+      <End Role="AnaSensori" EntitySet="AnaSensori" />
+      <End Role="StoricoAllarmi" EntitySet="StoricoAllarmi" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SensoriLuogo_Luoghi" Association="Self.FK_SensoriLuogo_Luoghi">
+      <End Role="Luoghi" EntitySet="Luoghi" />
+      <End Role="SensoriLuogo" EntitySet="SensoriLuogo" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

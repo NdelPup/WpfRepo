@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dballarmiModelStoreContainer" CdmEntityContainer="dballarmiEntities">
+    <EntitySetMapping Name="AnaOperatori">
+      <EntityTypeMapping TypeName="dballarmiModel.AnaOperatori">
+        <MappingFragment StoreEntitySet="AnaOperatori">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AnaSensori">
+      <EntityTypeMapping TypeName="dballarmiModel.AnaSensori">
+        <MappingFragment StoreEntitySet="AnaSensori">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdTipo" ColumnName="IdTipo" />
+          <ScalarProperty Name="IsAbilitato" ColumnName="IsAbilitato" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Luoghi">
+      <EntityTypeMapping TypeName="dballarmiModel.Luoghi">
+        <MappingFragment StoreEntitySet="Luoghi">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CoorX" ColumnName="CoorX" />
+          <ScalarProperty Name="CoorY" ColumnName="CoorY" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SensoriLuogo">
+      <EntityTypeMapping TypeName="dballarmiModel.SensoriLuogo">
+        <MappingFragment StoreEntitySet="SensoriLuogo">
+          <ScalarProperty Name="IdCasa" ColumnName="IdCasa" />
+          <ScalarProperty Name="IdSensore1" ColumnName="IdSensore1" />
+          <ScalarProperty Name="IdSensore2" ColumnName="IdSensore2" />
+          <ScalarProperty Name="IdSensore3" ColumnName="IdSensore3" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StoricoAllarmi">
+      <EntityTypeMapping TypeName="dballarmiModel.StoricoAllarmi">
+        <MappingFragment StoreEntitySet="StoricoAllarmi">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdSensore" ColumnName="IdSensore" />
+          <ScalarProperty Name="OraScatto" ColumnName="OraScatto" />
+          <ScalarProperty Name="ValoreAllarme" ColumnName="ValoreAllarme" />
+          <ScalarProperty Name="OraDisatt" ColumnName="OraDisatt" />
+          <ScalarProperty Name="IdOperatore" ColumnName="IdOperatore" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipiSensori">
+      <EntityTypeMapping TypeName="dballarmiModel.TipiSensori">
+        <MappingFragment StoreEntitySet="TipiSensori">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TipoSensore" ColumnName="TipoSensore" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

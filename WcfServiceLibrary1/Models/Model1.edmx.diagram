@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a6e3fd8855b446fe9ffcfe80410c6310" Name="Diagram1">
+        <EntityTypeShape EntityType="dballarmiModel.AnaOperatori" Width="1.5" PointX="1" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="dballarmiModel.AnaSensori" Width="1.5" PointX="0.875" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="dballarmiModel.Luoghi" Width="1.5" PointX="3.125" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="dballarmiModel.SensoriLuogo" Width="1.5" PointX="5.625" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="dballarmiModel.StoricoAllarmi" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="dballarmiModel.TipiSensori" Width="1.5" PointX="5.625" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="dballarmiModel.FK_StoricoAllarmi_AnaOperatori" ManuallyRouted="false" />
+        <AssociationConnector Association="dballarmiModel.FK_StoricoAllarmi_AnaSensori" ManuallyRouted="false" />
+        <AssociationConnector Association="dballarmiModel.FK_SensoriLuogo_Luoghi" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

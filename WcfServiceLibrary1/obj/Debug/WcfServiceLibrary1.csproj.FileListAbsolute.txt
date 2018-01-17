@@ -1,0 +1,12 @@
+C:\Users\PC\source\repos\WcfServiceLibrary1\WcfServiceLibrary1\bin\Debug\WcfServiceLibrary1.dll.config
+C:\Users\PC\source\repos\WcfServiceLibrary1\WcfServiceLibrary1\bin\Debug\WcfServiceLibrary1.dll
+C:\Users\PC\source\repos\WcfServiceLibrary1\WcfServiceLibrary1\bin\Debug\WcfServiceLibrary1.pdb
+C:\Users\PC\source\repos\WcfServiceLibrary1\WcfServiceLibrary1\bin\Debug\EntityFramework.dll
+C:\Users\PC\source\repos\WcfServiceLibrary1\WcfServiceLibrary1\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\PC\source\repos\WcfServiceLibrary1\WcfServiceLibrary1\bin\Debug\EntityFramework.xml
+C:\Users\PC\source\repos\WcfServiceLibrary1\WcfServiceLibrary1\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\PC\source\repos\WcfServiceLibrary1\WcfServiceLibrary1\bin\Debug\it\EntityFramework.resources.dll
+C:\Users\PC\source\repos\WcfServiceLibrary1\WcfServiceLibrary1\obj\Debug\WcfServiceLibrary1.csprojResolveAssemblyReference.cache
+C:\Users\PC\source\repos\WcfServiceLibrary1\WcfServiceLibrary1\obj\Debug\WcfServiceLibrary1.csproj.CoreCompileInputs.cache
+C:\Users\PC\source\repos\WcfServiceLibrary1\WcfServiceLibrary1\obj\Debug\WcfServiceLibrary1.dll
+C:\Users\PC\source\repos\WcfServiceLibrary1\WcfServiceLibrary1\obj\Debug\WcfServiceLibrary1.pdb

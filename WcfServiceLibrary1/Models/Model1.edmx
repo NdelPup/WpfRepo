@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dballarmiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AnaOperatori">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="AnaSensori">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdTipo" Type="int" />
+          <Property Name="IsAbilitato" Type="bit" />
+        </EntityType>
+        <EntityType Name="Luoghi">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CoorX" Type="int" />
+          <Property Name="CoorY" Type="int" />
+          <Property Name="nome" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SensoriLuogo">
+          <Key>
+            <PropertyRef Name="IdCasa" />
+          </Key>
+          <Property Name="IdCasa" Type="int" Nullable="false" />
+          <Property Name="IdSensore1" Type="int" />
+          <Property Name="IdSensore2" Type="int" />
+          <Property Name="IdSensore3" Type="int" />
+        </EntityType>
+        <EntityType Name="StoricoAllarmi">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdSensore" Type="int" />
+          <Property Name="OraScatto" Type="datetime" />
+          <Property Name="ValoreAllarme" Type="int" />
+          <Property Name="OraDisatt" Type="datetime" />
+          <Property Name="IdOperatore" Type="int" />
+        </EntityType>
+        <EntityType Name="TipiSensori">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipoSensore" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_SensoriLuogo_Luoghi">
+          <End Role="Luoghi" Type="Self.Luoghi" Multiplicity="1" />
+          <End Role="SensoriLuogo" Type="Self.SensoriLuogo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Luoghi">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SensoriLuogo">
+              <PropertyRef Name="IdCasa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoricoAllarmi_AnaOperatori">
+          <End Role="AnaOperatori" Type="Self.AnaOperatori" Multiplicity="0..1" />
+          <End Role="StoricoAllarmi" Type="Self.StoricoAllarmi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnaOperatori">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoricoAllarmi">
+              <PropertyRef Name="IdOperatore" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoricoAllarmi_AnaSensori">
+          <End Role="AnaSensori" Type="Self.AnaSensori" Multiplicity="0..1" />
+          <End Role="StoricoAllarmi" Type="Self.StoricoAllarmi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnaSensori">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoricoAllarmi">
+              <PropertyRef Name="IdSensore" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dballarmiModelStoreContainer">
+          <EntitySet Name="AnaOperatori" EntityType="Self.AnaOperatori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AnaSensori" EntityType="Self.AnaSensori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Luoghi" EntityType="Self.Luoghi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SensoriLuogo" EntityType="Self.SensoriLuogo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoricoAllarmi" EntityType="Self.StoricoAllarmi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipiSensori" EntityType="Self.TipiSensori" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_SensoriLuogo_Luoghi" Association="Self.FK_SensoriLuogo_Luoghi">
+            <End Role="Luoghi" EntitySet="Luoghi" />
+            <End Role="SensoriLuogo" EntitySet="SensoriLuogo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoricoAllarmi_AnaOperatori" Association="Self.FK_StoricoAllarmi_AnaOperatori">
+            <End Role="AnaOperatori" EntitySet="AnaOperatori" />
+            <End Role="StoricoAllarmi" EntitySet="StoricoAllarmi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoricoAllarmi_AnaSensori" Association="Self.FK_StoricoAllarmi_AnaSensori">
+            <End Role="AnaSensori" EntitySet="AnaSensori" />
+            <End Role="StoricoAllarmi" EntitySet="StoricoAllarmi" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dballarmiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AnaOperatori">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="StoricoAllarmi" Relationship="Self.FK_StoricoAllarmi_AnaOperatori" FromRole="AnaOperatori" ToRole="StoricoAllarmi" />
+        </EntityType>
+        <EntityType Name="AnaSensori">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTipo" Type="Int32" />
+          <Property Name="IsAbilitato" Type="Boolean" />
+          <NavigationProperty Name="StoricoAllarmi" Relationship="Self.FK_StoricoAllarmi_AnaSensori" FromRole="AnaSensori" ToRole="StoricoAllarmi" />
+        </EntityType>
+        <EntityType Name="Luoghi">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CoorX" Type="Int32" />
+          <Property Name="CoorY" Type="Int32" />
+          <Property Name="nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SensoriLuogo" Relationship="Self.FK_SensoriLuogo_Luoghi" FromRole="Luoghi" ToRole="SensoriLuogo" />
+        </EntityType>
+        <EntityType Name="SensoriLuogo">
+          <Key>
+            <PropertyRef Name="IdCasa" />
+          </Key>
+          <Property Name="IdCasa" Type="Int32" Nullable="false" />
+          <Property Name="IdSensore1" Type="Int32" />
+          <Property Name="IdSensore2" Type="Int32" />
+          <Property Name="IdSensore3" Type="Int32" />
+          <NavigationProperty Name="Luoghi" Relationship="Self.FK_SensoriLuogo_Luoghi" FromRole="SensoriLuogo" ToRole="Luoghi" />
+        </EntityType>
+        <EntityType Name="StoricoAllarmi">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdSensore" Type="Int32" />
+          <Property Name="OraScatto" Type="DateTime" Precision="3" />
+          <Property Name="ValoreAllarme" Type="Int32" />
+          <Property Name="OraDisatt" Type="DateTime" Precision="3" />
+          <Property Name="IdOperatore" Type="Int32" />
+          <NavigationProperty Name="AnaOperatori" Relationship="Self.FK_StoricoAllarmi_AnaOperatori" FromRole="StoricoAllarmi" ToRole="AnaOperatori" />
+          <NavigationProperty Name="AnaSensori" Relationship="Self.FK_StoricoAllarmi_AnaSensori" FromRole="StoricoAllarmi" ToRole="AnaSensori" />
+        </EntityType>
+        <EntityType Name="TipiSensori">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoSensore" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_StoricoAllarmi_AnaOperatori">
+          <End Role="AnaOperatori" Type="Self.AnaOperatori" Multiplicity="0..1" />
+          <End Role="StoricoAllarmi" Type="Self.StoricoAllarmi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnaOperatori">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoricoAllarmi">
+              <PropertyRef Name="IdOperatore" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoricoAllarmi_AnaSensori">
+          <End Role="AnaSensori" Type="Self.AnaSensori" Multiplicity="0..1" />
+          <End Role="StoricoAllarmi" Type="Self.StoricoAllarmi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnaSensori">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoricoAllarmi">
+              <PropertyRef Name="IdSensore" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SensoriLuogo_Luoghi">
+          <End Role="Luoghi" Type="Self.Luoghi" Multiplicity="1" />
+          <End Role="SensoriLuogo" Type="Self.SensoriLuogo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Luoghi">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SensoriLuogo">
+              <PropertyRef Name="IdCasa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dballarmiEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AnaOperatori" EntityType="Self.AnaOperatori" />
+          <EntitySet Name="AnaSensori" EntityType="Self.AnaSensori" />
+          <EntitySet Name="Luoghi" EntityType="Self.Luoghi" />
+          <EntitySet Name="SensoriLuogo" EntityType="Self.SensoriLuogo" />
+          <EntitySet Name="StoricoAllarmi" EntityType="Self.StoricoAllarmi" />
+          <EntitySet Name="TipiSensori" EntityType="Self.TipiSensori" />
+          <AssociationSet Name="FK_StoricoAllarmi_AnaOperatori" Association="Self.FK_StoricoAllarmi_AnaOperatori">
+            <End Role="AnaOperatori" EntitySet="AnaOperatori" />
+            <End Role="StoricoAllarmi" EntitySet="StoricoAllarmi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoricoAllarmi_AnaSensori" Association="Self.FK_StoricoAllarmi_AnaSensori">
+            <End Role="AnaSensori" EntitySet="AnaSensori" />
+            <End Role="StoricoAllarmi" EntitySet="StoricoAllarmi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SensoriLuogo_Luoghi" Association="Self.FK_SensoriLuogo_Luoghi">
+            <End Role="Luoghi" EntitySet="Luoghi" />
+            <End Role="SensoriLuogo" EntitySet="SensoriLuogo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dballarmiModelStoreContainer" CdmEntityContainer="dballarmiEntities">
+          <EntitySetMapping Name="AnaOperatori">
+            <EntityTypeMapping TypeName="dballarmiModel.AnaOperatori">
+              <MappingFragment StoreEntitySet="AnaOperatori">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AnaSensori">
+            <EntityTypeMapping TypeName="dballarmiModel.AnaSensori">
+              <MappingFragment StoreEntitySet="AnaSensori">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdTipo" ColumnName="IdTipo" />
+                <ScalarProperty Name="IsAbilitato" ColumnName="IsAbilitato" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Luoghi">
+            <EntityTypeMapping TypeName="dballarmiModel.Luoghi">
+              <MappingFragment StoreEntitySet="Luoghi">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CoorX" ColumnName="CoorX" />
+                <ScalarProperty Name="CoorY" ColumnName="CoorY" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SensoriLuogo">
+            <EntityTypeMapping TypeName="dballarmiModel.SensoriLuogo">
+              <MappingFragment StoreEntitySet="SensoriLuogo">
+                <ScalarProperty Name="IdCasa" ColumnName="IdCasa" />
+                <ScalarProperty Name="IdSensore1" ColumnName="IdSensore1" />
+                <ScalarProperty Name="IdSensore2" ColumnName="IdSensore2" />
+                <ScalarProperty Name="IdSensore3" ColumnName="IdSensore3" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoricoAllarmi">
+            <EntityTypeMapping TypeName="dballarmiModel.StoricoAllarmi">
+              <MappingFragment StoreEntitySet="StoricoAllarmi">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdSensore" ColumnName="IdSensore" />
+                <ScalarProperty Name="OraScatto" ColumnName="OraScatto" />
+                <ScalarProperty Name="ValoreAllarme" ColumnName="ValoreAllarme" />
+                <ScalarProperty Name="OraDisatt" ColumnName="OraDisatt" />
+                <ScalarProperty Name="IdOperatore" ColumnName="IdOperatore" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipiSensori">
+            <EntityTypeMapping TypeName="dballarmiModel.TipiSensori">
+              <MappingFragment StoreEntitySet="TipiSensori">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TipoSensore" ColumnName="TipoSensore" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Nessuno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
